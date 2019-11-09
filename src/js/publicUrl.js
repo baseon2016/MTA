@@ -1,0 +1,3 @@
+const PUBLICURL = "";
+
+export { PUBLICURL };
