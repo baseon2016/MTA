@@ -7,9 +7,10 @@
       <Tabs />
       <transition name="route" mode="out-in">
         <div class="page-main" :key="current">
-          <OperationVideo v-if="current==='操作视频演示'" />
-          <EquipmentVideo v-if="current==='工艺设备介绍'" />
-          <FileDownload v-if="current==='文件下载'" />
+          <OperationVideo v-if="current === '操作视频演示'" />
+          <EquipmentVideo v-if="current === '工艺设备介绍'" />
+          <FileDownload v-if="current === '文件下载'" />
+          <SelfLearn v-if="current === '自主学习'" />
         </div>
       </transition>
     </div>
@@ -22,13 +23,15 @@ import Tabs from "../components/Tabs";
 import OperationVideo from "../components/OperationVideo";
 import EquipmentVideo from "../components/EquipmentVideo";
 import FileDownload from "../components/FileDownload";
+import SelfLearn from "../components/SelfLearn";
 export default {
   name: "resources",
   components: {
     Tabs,
     OperationVideo,
     EquipmentVideo,
-    FileDownload
+    FileDownload,
+    SelfLearn
   },
   computed: {
     ...mapState({
@@ -46,5 +49,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

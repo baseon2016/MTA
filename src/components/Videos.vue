@@ -1,9 +1,14 @@
 <template>
   <div class="videos">
-    <h4 class="videos-title">{{title}}</h4>
+    <h4 class="videos-title">{{ title }}</h4>
     <div class="videos-wrap">
-      <video :src="videoData.src" controls="controls" class="video" :id="videoData.src"></video>
-      <div v-if="videoData.info" class="video-info">{{videoData.info}}</div>
+      <video
+        :src="videoData.src"
+        controls="controls"
+        class="video"
+        :id="videoData.src"
+      ></video>
+      <div v-if="videoData.info" class="video-info">{{ videoData.info }}</div>
     </div>
   </div>
 </template>

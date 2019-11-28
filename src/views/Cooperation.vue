@@ -6,9 +6,13 @@
     <div class="page-section df">
       <Tabs />
       <transition name="route" mode="out-in">
-        <div class="page-main" :key="currentCooperation.title">
-          <h4>{{currentCooperation.title}}</h4>
-          {{currentCooperation.paragraph}}
+        <div
+          class="page-main"
+          :key="currentCooperation.Title"
+          v-if="currentCooperation"
+        >
+          <h4>{{ currentCooperation.Title }}</h4>
+          {{ currentCooperation.Remark }}
         </div>
       </transition>
     </div>
@@ -16,7 +20,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Tabs from "../components/Tabs";
 export default {
   name: "cooperation",
@@ -24,21 +28,16 @@ export default {
     Tabs
   },
   computed: {
-    ...mapState({
-      tabs: state => state.cooperation.tabs
-    }),
     ...mapGetters(["currentCooperation"])
   },
 
   methods: {
-    ...mapMutations(["assignTabs", "getCurrent"])
+    ...mapActions(["getCooperation"])
   },
   created() {
-    this.assignTabs(this.tabs);
-    this.getCurrent(this.tabs[0]);
+    this.getCooperation();
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

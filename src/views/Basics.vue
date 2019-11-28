@@ -6,9 +6,9 @@
     <div class="page-section df">
       <Tabs />
       <transition name="route" mode="out-in">
-        <div class="page-main" :key="currentBasics.title">
-          <h4>{{currentBasics.title}}</h4>
-          {{currentBasics.paragraph}}
+        <div class="page-main" :key="currentBasics.Title" v-if="currentBasics">
+          <h4>{{ currentBasics.Title }}</h4>
+          {{ currentBasics.Remark }}
         </div>
       </transition>
     </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Tabs from "../components/Tabs";
 export default {
   name: "basics",
@@ -24,17 +24,13 @@ export default {
     Tabs
   },
   computed: {
-    ...mapState({
-      tabs: state => state.basics.tabs
-    }),
     ...mapGetters(["currentBasics"])
   },
   methods: {
-    ...mapMutations(["assignTabs", "getCurrent"])
+    ...mapActions(["getBasics"])
   },
   created() {
-    this.assignTabs(this.tabs);
-    this.getCurrent(this.tabs[0]);
+    this.getBasics();
   }
 };
 </script>

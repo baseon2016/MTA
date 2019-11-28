@@ -6,7 +6,7 @@ const tabs = {
   mutations: {
     // 当前激活选项卡
     getCurrent(state, payload) {
-      state.current = payload.txt;
+      state.current = payload.Title;
     },
     // 侧边选项卡数据赋值本地
     assignTabs(state, payload) {

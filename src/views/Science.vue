@@ -6,9 +6,13 @@
     <div class="page-section df">
       <Tabs />
       <transition name="route" mode="out-in">
-        <div class="page-main" :key="currentScience.title">
-          <h4>{{currentScience.title}}</h4>
-          {{currentScience.paragraph}}
+        <div
+          class="page-main"
+          :key="currentScience.Title"
+          v-if="currentScience"
+        >
+          <h4>{{ currentScience.Title }}</h4>
+          {{ currentScience.Remark }}
         </div>
       </transition>
     </div>
@@ -16,7 +20,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Tabs from "../components/Tabs";
 export default {
   name: "science",
@@ -24,21 +28,16 @@ export default {
     Tabs
   },
   computed: {
-    ...mapState({
-      tabs: state => state.science.tabs
-    }),
     ...mapGetters(["currentScience"])
   },
 
   methods: {
-    ...mapMutations(["assignTabs", "getCurrent"])
+    ...mapActions(["getScience"])
   },
   created() {
-    this.assignTabs(this.tabs);
-    this.getCurrent(this.tabs[0]);
+    this.getScience();
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

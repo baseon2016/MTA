@@ -1,21 +1,23 @@
+import axios from "axios";
+import { PUBLICAXIOS } from "../../js/publicUrl";
 const resources = {
   state: {
     tabs: [
       {
-        id: "1",
-        txt: "操作视频演示"
+        Id: "1",
+        Title: "操作视频演示"
       },
       {
-        id: "2",
-        txt: "工艺设备介绍"
+        Id: "2",
+        Title: "工艺设备介绍"
       },
       {
-        id: "3",
-        txt: "文件下载"
+        Id: "3",
+        Title: "文件下载"
       },
       {
-        id: "4",
-        txt: "自主学习"
+        Id: "4",
+        Title: "自主学习"
       }
     ],
     downloadFiles: [
@@ -69,12 +71,47 @@ const resources = {
         createTime: "2019-10-14",
         downloadTimes: "7"
       }
+    ],
+    selfLearn: [
+      {
+        Subjects: {
+          Answer: "试题管理测试1",
+          SubType: "1",
+          SubjectId: "3717872544494125056",
+          Title: "试题管理测试1"
+        },
+        SubjectOptions: [
+          {
+            Createtime: "2019-11-22T10:14:56.31",
+            Id: 25,
+            SubjectId: "3718254251110039552",
+            UserId: "3679565158411141120",
+            itemKey: "A",
+            itemValue: "试题管理测试判断2"
+          }
+        ]
+      }
     ]
   },
+  mutations: {
+    assignSelfLearn(state, payload) {
+      state.selfLearn = payload;
+    }
+  },
+  actions: {
+    getSelfLearn() {
+      return axios.get(PUBLICAXIOS + "/api/index/subjectone");
+    }
+  },
   getters: {
-    currentreRources(state, getters) {
-      const result = state.articles.find(item => item.title === getters.currentTxt);
-      return result;
+    learnType1(state) {
+      const chooseType = state.selfLearn.filter(
+        item => item.Subjects.SubType === "1"
+      );
+      return chooseType.map(item => {
+        const addAnswer = { ...item, userAnswer: "" };
+        return addAnswer;
+      });
     }
   }
 };

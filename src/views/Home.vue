@@ -15,7 +15,7 @@
       <div class="mg-t-40 df">
         <div class="home-download">
           <ListContainer title="文件下载" moreUrl="#">
-            <IconList :listData="learnResource" imgSrc="txt">
+            <IconList :listData="downloadFiles" imgSrc="txt">
               <template v-slot:fileInfo>
                 <div class="item-info df">
                   <span>标签:表格</span>
@@ -50,7 +50,7 @@ import ListContainer from "../components/ListContainer";
 import List from "../components/List";
 import IconList from "../components/IconList";
 import ImgList from "../components/ImgList";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   name: "home",
   components: {
@@ -66,6 +66,12 @@ export default {
       projects: state => state.home.projects
     }),
     ...mapGetters(["affairsL", "affairsR"])
+  },
+  methods: {
+    ...mapActions(["getHomeData"])
+  },
+  created() {
+    this.getHomeData();
   }
 };
 </script>
@@ -76,5 +82,9 @@ export default {
 }
 .affair-list {
   margin-top: 40px;
+}
+.home-download,
+.home-learn {
+  width: 50%;
 }
 </style>

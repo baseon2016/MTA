@@ -7,7 +7,7 @@
       <Tabs />
       <transition name="route" mode="out-in">
         <div class="page-main">
-          <List :listData="newsList" :maxWidth="700+'px'" />
+          <List :listData="newsList" :maxWidth="700 + 'px'" />
         </div>
       </transition>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import Tabs from "../components/Tabs";
 import List from "../components/List";
 export default {
@@ -32,14 +32,15 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["assignTabs", "getCurrent"])
+    ...mapMutations(["assignTabs", "getCurrent"]),
+    ...mapActions(["getAffairs"])
   },
   created() {
     this.assignTabs(this.tabs);
     this.getCurrent(this.tabs[0]);
+    this.getAffairs();
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

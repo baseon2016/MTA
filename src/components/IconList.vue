@@ -1,19 +1,23 @@
 <template>
   <div class="list">
     <ul class="list-ul">
-      <li v-for="item in listData" :key="item.id" class="df">
+      <li v-for="item in listData" :key="item.Id" class="df">
         <div>
-          <img :src="imgSrc==='exe'?exeUrl:imgSrc==='txt'?txtUrl:''" alt="下载文件" v-if="imgSrc" />
+          <img
+            :src="imgSrc === 'exe' ? exeUrl : imgSrc === 'txt' ? txtUrl : ''"
+            alt="下载文件"
+            v-if="imgSrc"
+          />
           <i v-else>·</i>
         </div>
         <div class="list-title">
-          <div class="item-name" :style="{width: maxWidth}">
-            <p class="item-title">{{item.Title}}</p>
+          <div class="item-name" :style="{ width: maxWidth }">
+            <p class="item-title">{{ item.Title }}</p>
             <slot name="subTitle" :item="item" class="sub-title"></slot>
           </div>
           <slot name="fileInfo" :item="item" class="item-info"></slot>
         </div>
-        <span class="list-date" v-if="hasDate">{{item.createTime}}</span>
+        <span class="list-date" v-if="hasDate">{{ item.createTime }}</span>
         <span class="btn-download" v-if="hasBtn">立即下载</span>
       </li>
     </ul>

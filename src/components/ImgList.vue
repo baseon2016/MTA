@@ -1,10 +1,10 @@
 <template>
   <div class="list">
     <ul>
-      <li v-for="item in listData" :key="item.id" class="df">
+      <li v-for="item in listData" :key="item.Id" class="df">
         <div class="projects-text po-r">
           <img src="../assets/images/btn.png" alt="下载文件" />
-          <span class="po-a">{{item.Title}}</span>
+          <span class="po-a">{{ item.Title }}</span>
         </div>
       </li>
     </ul>

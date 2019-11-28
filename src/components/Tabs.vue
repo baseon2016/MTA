@@ -1,7 +1,11 @@
 <template>
   <div class="tabs">
-    <div v-for="item in tabs" :key="item.id" class="tab">
-      <span :class="{'active':item.txt===current}" @click="switchTab(item)">{{item.txt}}</span>
+    <div v-for="item in tabs" :key="item.Id" class="tab">
+      <span
+        :class="{ active: item.Title === current }"
+        @click="switchTab(item)"
+        >{{ item.Title }}</span
+      >
     </div>
   </div>
 </template>
@@ -19,7 +23,7 @@ export default {
   methods: {
     ...mapMutations(["getCurrent", "clearCurrent", "assignTabs"]),
     switchTab(item) {
-      if (item.txt !== this.current) {
+      if (item.Title !== this.current) {
         this.clearCurrent();
         this.getCurrent(item);
         this.$emit("clickTab");

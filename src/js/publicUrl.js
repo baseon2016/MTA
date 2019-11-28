@@ -1,3 +1,3 @@
-const PUBLICURL = "";
+const PUBLICAXIOS = "http://cs.bohechina.com:8070";
 
-export { PUBLICURL };
+export { PUBLICAXIOS };

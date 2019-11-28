@@ -1,12 +1,14 @@
 <template>
   <div class="list">
     <ul>
-      <li v-for="item in listData" :key="item.id" class="df">
-        <span class="list-title df" :style="{'max-width':maxWidth}">
+      <li v-for="item in listData" :key="item.Id" class="df">
+        <span class="list-title df" :style="{ 'max-width': maxWidth }">
           <i>·</i>
-          {{item.Title}}
+          {{ item.Title }}
         </span>
-        <span class="list-date" v-if="item.createTime">{{item.createTime}}</span>
+        <span class="list-date" v-if="item.Createtime">{{
+          item.Createtime
+        }}</span>
       </li>
     </ul>
   </div>
@@ -28,5 +30,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

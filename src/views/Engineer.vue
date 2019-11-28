@@ -3,12 +3,12 @@
     <div class="page-title">
       <h3>智能化工</h3>
     </div>
-    <div class="page-section df">
+    <div class="page-section df" v-if="currentEngineer">
       <Tabs />
       <transition name="route" mode="out-in">
-        <div class="page-main" :key="currentEngineer.title">
-          <h4>{{currentEngineer.title}}</h4>
-          {{currentEngineer.paragraph}}
+        <div class="page-main" :key="currentEngineer.Title">
+          <h4>{{ currentEngineer.Title }}</h4>
+          {{ currentEngineer.Remark }}
         </div>
       </transition>
     </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Tabs from "../components/Tabs";
 export default {
   name: "engineer",
@@ -24,21 +24,16 @@ export default {
     Tabs
   },
   computed: {
-    ...mapState({
-      tabs: state => state.engineer.tabs
-    }),
     ...mapGetters(["currentEngineer"])
   },
 
   methods: {
-    ...mapMutations(["assignTabs", "getCurrent"])
+    ...mapActions(["getEngineer"])
   },
   created() {
-    this.assignTabs(this.tabs);
-    this.getCurrent(this.tabs[0]);
+    this.getEngineer();
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>
