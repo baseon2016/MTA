@@ -1,0 +1,110 @@
+<template>
+  <div class="list" :style="{ width: width }">
+    <ul>
+      <li v-for="item in listData" :key="item.Id" class="df">
+        <div class="list-tags">
+          <img
+            :src="
+              item.Tags === '安装包'
+                ? exeUrl
+                : item.Tags === '文档'
+                ? txtUrl
+                : ''
+            "
+            alt="下载文件"
+            v-if="item.Tags"
+          />
+          <i v-else>·</i>
+        </div>
+        <div class="list-title">
+          <div class="item-name" :style="{ width: maxWidth }">
+            <p class="item-title">{{ item.Title }}</p>
+            <slot name="subTitle" :item="item" class="sub-title"></slot>
+          </div>
+          <slot name="fileInfo" :item="item" class="item-info"></slot>
+        </div>
+        <span class="list-date" v-if="hasDate">{{ item.createTime }}</span>
+        <span class="btn-download" v-if="hasBtn">立即下载</span>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import txtIcon from "../assets/images/txt.png";
+import exeIcon from "../assets/images/exeIcon.png";
+export default {
+  name: "icon-list",
+  data() {
+    return {
+      txtUrl: txtIcon,
+      exeUrl: exeIcon
+    };
+  },
+  props: {
+    imgSrc: {
+      type: String,
+      default: ""
+    },
+    listData: {
+      type: Array,
+      required: true
+    },
+    hasBtn: {
+      type: Boolean,
+      default: false
+    },
+    hasDate: {
+      type: Boolean,
+      default: false
+    },
+    width: {
+      type: String,
+      default: 390 + "px"
+    },
+    maxWidth: {
+      type: String,
+      default: 340 + "px"
+    }
+  }
+};
+</script>
+
+<style>
+.list .list-tags {
+  width: 26px;
+}
+.list .list-tags img {
+  width: 100%;
+  display: block;
+}
+.list .item-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.list .item-title {
+  margin-bottom: 10px;
+}
+.list .sub-title {
+  font-size: 14px;
+  color: #666;
+}
+.list .item-info {
+  justify-content: space-between;
+  font-size: 12px;
+  color: #999;
+}
+
+span.btn-download {
+  display: block;
+  width: 88px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 34px;
+  color: #fff;
+  background-color: #003262;
+  border-radius: 17px;
+  text-align: center;
+}
+</style>

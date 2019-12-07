@@ -1,0 +1,38 @@
+<template>
+  <div class="experiments">
+    <div class="page-title">
+      <h3>实验项目</h3>
+    </div>
+    <div class="page-section df" v-if="collapseCurrentTxt">
+      <CollapseTab />
+      <transition name="route" mode="out-in">
+        <div class="page-main" :key="collapseCurrentTxt.Id">
+          <h4>{{ collapseCurrentTxt.Title }}</h4>
+          {{ collapseCurrentTxt.Remark }}
+        </div>
+      </transition>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from "vuex";
+import CollapseTab from "../components/CollapseTab";
+export default {
+  name: "experiments",
+  components: {
+    CollapseTab
+  },
+  computed: {
+    ...mapGetters(["collapseCurrentTxt"])
+  },
+  methods: {
+    ...mapActions(["getExperiments"])
+  },
+  created() {
+    this.getExperiments();
+  }
+};
+</script>
+
+<style></style>

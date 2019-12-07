@@ -1,0 +1,69 @@
+<template>
+  <div class="list" :style="{ width: width }">
+    <ul>
+      <li v-for="item in listData" :key="item.Id" class="df">
+        <span class="list-title df" :style="{ 'max-width': maxWidth }">
+          <i>·</i>
+          {{ item.Title }}
+        </span>
+        <span class="list-date" v-if="hasDate">{{ item.Createtime }}</span>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "list",
+  props: {
+    listData: {
+      type: Array,
+      required: true
+    },
+    width: {
+      type: String,
+      default: 390 + "px"
+    },
+    maxWidth: {
+      type: String,
+      default: 390 + "px"
+    },
+    hasDate: {
+      type: Boolean,
+      default: false
+    }
+  }
+};
+</script>
+
+<style>
+.list {
+  font-size: 16px;
+  color: #333;
+  line-height: 1;
+}
+.list ul li {
+  /* justify-content: space-between; */
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 18px;
+}
+.list ul li .list-title {
+  align-items: center;
+}
+.list ul li img,
+.list ul li i {
+  display: block;
+  margin-right: 10px;
+}
+.list span.list-date {
+  font-size: 14px;
+  color: #ddd;
+  align-self: flex-end;
+}
+.list ul li:hover,
+.list ul li:hover .sub-title {
+  color: #002856;
+}
+</style>

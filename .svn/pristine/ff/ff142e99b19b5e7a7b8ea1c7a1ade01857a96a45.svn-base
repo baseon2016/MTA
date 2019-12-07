@@ -1,0 +1,104 @@
+<template>
+  <div class="collapse-tabs">
+    <el-collapse accordion :value="collapseCurrent" @change="switchCollapseTab">
+      <el-collapse-item
+        v-for="item in collapseTabs"
+        :title="item.Title"
+        :name="item.Id"
+        :key="item.Id"
+        class="collapse-tab"
+      >
+        <div
+          v-for="ele in item.tabItems"
+          :key="ele.Id"
+          :class="{
+            'collapse-tab-item': true,
+            active: ele.Id === collapseCurrentSubitem
+          }"
+          @click="switchCollapseTabItem(ele)"
+        >
+          {{ ele.Title }}
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+  </div>
+</template>
+
+<script>
+import { mapState, mapMutations } from "vuex";
+export default {
+  name: "collapse-tab",
+  data() {
+    return {
+      activeName: ""
+    };
+  },
+  computed: {
+    ...mapState({
+      collapseCurrent: state => state.collapseTabs.collapseCurrent,
+      collapseCurrentSubitem: state =>
+        state.collapseTabs.collapseCurrentSubitem,
+      collapseTabs: state => state.collapseTabs.collapseTabs
+    })
+  },
+  methods: {
+    ...mapMutations(["assignCollapseCurrent", "assignTabItem"]),
+    switchCollapseTab(collapseCurrentId) {
+      this.assignCollapseCurrent(
+        this.collapseTabs.find(item => item.Id === collapseCurrentId)
+      );
+    },
+    switchCollapseTabItem(ele) {
+      this.assignTabItem(ele);
+    }
+  }
+};
+</script>
+
+<style>
+.collapse-tabs {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #fff;
+}
+.collapse-tabs .collapse-tab {
+  border-bottom: 1px solid #ededed;
+}
+
+.collapse-tabs .el-collapse {
+  border-top: 0;
+  border-bottom: 0;
+}
+.collapse-tabs .el-collapse-item__header {
+  font-size: 18px;
+  color: #333;
+  background-color: #fff;
+  height: 52px;
+  line-height: 52px;
+  padding-left: 25px;
+  font-weight: normal;
+}
+.el-collapse-item__header.is-active {
+  color: #fff;
+  background-color: #002856;
+}
+.el-collapse-item__arrow {
+  color: transparent;
+}
+.el-collapse-item__arrow.is-active {
+  color: #fff;
+}
+.collapse-tab-item {
+  font-size: 16px;
+  color: #666;
+  background-color: #fff;
+  cursor: pointer;
+  user-select: none;
+  line-height: 52px;
+  height: 52px;
+  padding-left: 25px;
+}
+.collapse-tab-item.active {
+  background-color: #f2f2f2;
+}
+</style>
